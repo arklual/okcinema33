@@ -14,6 +14,12 @@
     <div class="form-group">
     <label for="id_username">Логин:</label> {{ form.username }}
     </div>
+    {% if form.email.errors %}
+        {{ form.email.html_error_list }}
+    {% endif %}
+    <div class="form-group">
+    <label for="id_email">Email:</label> {{ form.email }}
+    </div>
     {% if form.password1.errors %}
       {{ form.password1.html_error_list }}
     {% endif %}
