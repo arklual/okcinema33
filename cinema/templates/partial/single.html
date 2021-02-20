@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>{{ film.title }}</title>
+{% endblock %}
+ 
+{% block body %}
+    <h1>{{ film.title }}</h1>
+    <div class="container">
+        <img class="poster" src="{{film.poster.url}}">
+        <p>{{film.description}}</p>
+        <h2>Оценка: {{film.raiting}}</h2>
+        {% if user.is_authenticated %}
+        <a class="btn-default" href="/{{film.get_p_absolute_url}}"><button>Просмотр</button></a>
+        <br>
+        <br>
+        <!-- There we need do the test, have user marked it yet? -->
+        {% if notIsMarked %}
+        <p>Посмотрели? Оцените:</p>
+        <form class="form" action="{% url 'ball' film.id %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            <br>
+            <input type="submit" value="OK">
+        </form>
+        {% endif %}
+        {% else %}
+        <p><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
+        {% endif %}
+    </div>
+    <br>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>{{ title }}</title>
+{% endblock %}
+{% block body %}
+    <header class="header"></header>
+	<br>
+	<div class="container">
+    	<h3>Новинки:</h3>
+    	<div class="row blog">
+			{% for obj in filmList %}
+        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+				<div class="card">
+					<div class="card-img">
+						<img align="center" src="{{obj.poster.url}}" class="img-fluid">
+					</div>
+					<div class="card-body">
+						<h4>{{ obj.title }}</h4>
+						<p class="card-text">
+							{{ obj.description|truncatechars:70 }}
+						</p>
+					</div>
+					<div class="card-footer">
+						<a href="{{ obj.get_absolute_url }}" class="card-link">Смотреть</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% for obj in sList %}
+        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+				<div class="card">
+					<div class="card-img">
+						<img align="center" src="{{obj.poster.url}}" class="img-fluid">
+					</div>
+					<div class="card-body">
+						<h4>{{ obj.title }}</h4>
+						<p class="card-text">
+							{{ obj.description|truncatechars:70 }}
+						</p>
+					</div>
+					<div class="card-footer">
+						<a href="{{ obj.get_absolute_url }}" class="card-link">Смотреть</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+    </div>
+{% endblock %}
