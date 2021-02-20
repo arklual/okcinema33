@@ -6,9 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import FormView
 from accounts.forms import CreateUserForm
 
-
 class MyRegisterFormView(FormView):
-    form_class = UserCreationForm
+    form_class = CreateUserForm
     success_url = reverse_lazy('login')
     template_name = "registration/signup.html"
 
