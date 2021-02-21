@@ -24,4 +24,5 @@ urlpatterns = [
     path('play/', include(('player.urls', 'player'), namespace='player')),
     path('marks/', include(('marks.urls', 'marks'), namespace='mark')),
     path('serial/', include(('serials.urls', 'serials'), namespace='serial')),
+    path('list/', include(('movieList.urls', 'movieList'), namespace='list')),
 ]

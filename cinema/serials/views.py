@@ -14,4 +14,4 @@ def serial(request, id=None):
         "form": form,
     }
     context['sers'] = serial.seriya_set.all().filter()
-    return render(request, "partial/single_serial.html", context)
+    return render(request, "partial/single_serial.html", context) 
