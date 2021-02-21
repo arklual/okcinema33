@@ -14,13 +14,13 @@
             <h3>Сезон {{ forloop.counter }}</h3>
                 {% for ser in sers %}
                     {% if ser.season == forloop.parentloop.counter %}
-                        <a href="/{{ser.get_absolute_url}}">{{ser.number}}.{{ser.title}}</a>
+                        <a href="{% url 'player:player' ser.id ser.season ser.number%}">{{ser.number}}.{{ser.title}}</a>
                     {% endif %}
                 {% endfor %}
         {% endfor %}
         {% if notSerIsMarked %}
         <p>Посмотрели? Оцените:</p>
-        <form class="form" action="{% url 'ball' s.id %}" method="post">
+        <form class="form" action="{% url 'mark:ball' s.id %}" method="post">
             {% csrf_token %}
             {{form}}
             <br>

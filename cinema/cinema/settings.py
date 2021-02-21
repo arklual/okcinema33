@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'films.apps.FilmsConfig',
     'accounts.apps.AccountsConfig',
     'player.apps.PlayerConfig',
+    'serials.apps.SerialsConfig',
+    'marks.apps.MarksConfig',
 ]
 
 MIDDLEWARE = [

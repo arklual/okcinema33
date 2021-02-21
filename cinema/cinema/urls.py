@@ -21,5 +21,7 @@ urlpatterns = [
     path('', include('films.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
-    path('play/', include('player.urls')),
+    path('play/', include(('player.urls', 'player'), namespace='player')),
+    path('marks/', include(('marks.urls', 'marks'), namespace='mark')),
+    path('serial/', include(('serials.urls', 'serials'), namespace='serial')),
 ]

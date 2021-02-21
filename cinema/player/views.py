@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, Http404
-from films.models import Film, Seriya
+from films.models import Film
+from serials.models import Seriya
 def player(request, id=None, season=None, number=None):
     try:
         video = get_object_or_404(Film, id=id)

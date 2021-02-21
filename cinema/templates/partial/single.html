@@ -10,13 +10,13 @@
         <p>{{film.description}}</p>
         <h2>Оценка: {{film.raiting}}</h2>
         {% if user.is_authenticated %}
-        <a class="btn-default" href="/{{film.get_p_absolute_url}}"><button>Просмотр</button></a>
+        <a class="btn-default" href="{% url 'player:player' film.id 1 1 %}"><button>Просмотр</button></a>
         <br>
         <br>
         <!-- There we need do the test, have user marked it yet? -->
         {% if notIsMarked %}
         <p>Посмотрели? Оцените:</p>
-        <form class="form" action="{% url 'ball' film.id %}" method="post">
+        <form class="form" action="{% url 'mark:ball' film.id %}" method="post">
             {% csrf_token %}
             {{form}}
             <br>

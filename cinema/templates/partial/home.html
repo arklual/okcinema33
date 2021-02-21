@@ -23,7 +23,7 @@
 						</p>
 					</div>
 					<div class="card-footer">
-						<a href="{{ obj.get_absolute_url }}" class="card-link">Смотреть</a>
+						<a href="{% url 'single' obj.id%}" class="card-link">Смотреть</a>
 					</div>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 						</p>
 					</div>
 					<div class="card-footer">
-						<a href="{{ obj.get_absolute_url }}" class="card-link">Смотреть</a>
+						<a href="{% url 'serials:serial' obj.id%}" class="card-link">Смотреть</a>
 					</div>
 				</div>
 			</div>
