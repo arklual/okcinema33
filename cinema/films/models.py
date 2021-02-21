@@ -31,9 +31,9 @@ class Serial(models.Model):
 
 class Seriya(models.Model):
     serial = models.ForeignKey(Serial,default="", on_delete=models.CASCADE)
-    title = models.CharField(max_length=50, default="")
-    number = models.IntegerField()
     season = models.IntegerField()
+    number = models.IntegerField()
+    title = models.CharField(max_length=50, default="")
     video = models.FileField(null=True, blank=True)
     def __str__(self):
         return f"{self.number}.{self.title}"

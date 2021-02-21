@@ -1,15 +1,15 @@
 from django.http import HttpResponse
-from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404, Http404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.contrib.auth.forms import UserCreationForm
-
 from films.models import Film, Serial, Seriya, Voter, SerialVoter
 from .forms import BallForm
 
 def home(request):
     filmList = Film.objects.order_by('-date')
+    while filmList.count() > 3:
+        del filmList[filmList.count-1]
     serialList = Serial.objects.order_by('-date')
+    while serialList.count() > 3:
+        del serialList[serialList.count-1]
     context = {
         "filmList": filmList,
         "sList": serialList,
@@ -39,15 +39,6 @@ def serial(request, id=None):
     }
     context['sers'] = serial.seriya_set.all().filter()
     return render(request, "partial/single_serial.html", context)
-def full_player(request, id=None, season=None, number=None):
-    try:
-        video = get_object_or_404(Film, id=id)
-    except Http404:
-        video = get_object_or_404(Seriya, season=season, number=number) 
-    context={
-        "v":video,
-    }
-    return render(request, "partial/player.html", context)
 def ball(request, id=id):
     form = BallForm(request.POST)
     if form.is_valid():

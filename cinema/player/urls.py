@@ -5,10 +5,6 @@ from django.conf.urls.static import static
 from .import views
  
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('<int:id>/', views.single, name='single'),
-    path('serial/<int:id>/', views.serial, name='serial'),
-    path('<int:id>/ball/', views.ball, name='ball'),
-    path('inf/', views.info, name="info"),
+    path('<int:id>/<int:season>/<int:number>', views.player, name='player'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
