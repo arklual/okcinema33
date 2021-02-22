@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, Http404
 from films.models import Film
 from serials.models import Serial, Seriya
-from marks.models import Voter, SerialVoter
-from .forms import BallForm
+from marks.models import Voter, SerialVoter, FilmRecension, SerialRecension
+from .forms import BallForm, ResensionForm
 
 def ball(request, id=id):
     form = BallForm(request.POST)
@@ -22,7 +22,7 @@ def ball(request, id=id):
             film = get_object_or_404(Serial, id=id)
             if SerialVoter.objects.filter(serial_id=id, user_id=request.user.id).exists():
                 context = {
-                    "text": "Вы уже оценили этот фильм",
+                    "text": "Вы уже оценили этот сериал",
                     "title": "Ошибка",
                 }
                 return render(request, "partial/information.html", context)
@@ -47,6 +47,59 @@ def ball(request, id=id):
                 "range": range(film.count_sesonov),
             }
             return render(request, "partial/single_serial.html", context)
+def recension(request, id=id):
+    rForm = ResensionForm(request.POST)
+    form = BallForm(request.POST)
+    if rForm.is_valid():
+        title = rForm.cleaned_data['title']
+        text = rForm.cleaned_data['text']
+        try:
+            film = get_object_or_404(Film, id=id)
+            if FilmRecension.objects.filter(film_id=id, user_id=request.user.id).exists():
+                context = {
+                    "text": "Вы уже написали рецензию на этот фильм",
+                    "title": "Ошибка",
+                }
+                return render(request, "partial/information.html", context)
+            r=FilmRecension(user=request.user, film=film, title=title, text=text)
+            r.save()
+        except Http404:
+            film = get_object_or_404(Serial, id=id)
+            if SerialRecension.objects.filter(serial_id=id, user_id=request.user.id).exists():
+                context = {
+                    "text": "Вы уже написали рецензию на этот сериал",
+                    "title": "Ошибка",
+                }
+                return render(request, "partial/information.html", context)
+            r=SerialRecension(user=request.user, serial=film, title=title, text=text)
+            r.save()
+        if type(film)==Film:
+            context = {
+                "notIsMarked": not Voter.objects.filter(film_id=id, user_id=request.user.id).exists(),
+                "film": film,
+                "form": form,
+                "rForm": rForm,
+            }
+            return render(request, "partial/single.html", context)
+        elif type(film)==Serial:
+            context = {
+                "form": form,
+                "rForm": rForm,
+                "notSerIsMarked": not SerialVoter.objects.filter(serial_id=id, user_id=request.user.id).exists(),
+                "s": film,
+                "range": range(film.count_sesonov),
+            }
+            return render(request, "partial/single_serial.html", context)
+    else:
+        try:
+            f = get_object_or_404(Film, id=id)
+        except Http404:
+            f = get_object_or_404(Serial, id=id)
+        context = {
+            "rForm": rForm,
+            "film": f,
+        }
+        return render(request, "partial/createRecension.html", context)
 def info(request):
     context = {
         "text": "Здесь должна быть информация",

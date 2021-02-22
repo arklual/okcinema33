@@ -23,6 +23,7 @@
             <input class="btn btn-default" type="submit" value="OK">
         </form>
         {% endif %}
+        <p>Оставить <a href="{% url 'mark:recension' film.id %}">рецензию</a></p>
         {% else %}
         <p><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
         {% endif %}
