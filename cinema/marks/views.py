@@ -74,22 +74,14 @@ def recension(request, id=id):
             r=SerialRecension(user=request.user, serial=film, title=title, text=text)
             r.save()
         if type(film)==Film:
-            context = {
-                "notIsMarked": not Voter.objects.filter(film_id=id, user_id=request.user.id).exists(),
-                "film": film,
-                "form": form,
-                "rForm": rForm,
-            }
-            return render(request, "partial/single.html", context)
+            recension_list = FilmRecension.objects.filter(film=film)
         elif type(film)==Serial:
-            context = {
-                "form": form,
-                "rForm": rForm,
-                "notSerIsMarked": not SerialVoter.objects.filter(serial_id=id, user_id=request.user.id).exists(),
-                "s": film,
-                "range": range(film.count_sesonov),
-            }
-            return render(request, "partial/single_serial.html", context)
+            recension_list = SerialRecension.objects.filter(serial=film)
+        context = {
+        "rList":recension_list,
+        "film": film,
+        }
+        return render(request, "partial/recension_list.html", context)
     else:
         try:
             f = get_object_or_404(Film, id=id)
@@ -100,6 +92,27 @@ def recension(request, id=id):
             "film": f,
         }
         return render(request, "partial/createRecension.html", context)
+def recension_list(request, id=id):
+    try:
+        f = get_object_or_404(Film, id=id)
+        recension_list = FilmRecension.objects.filter(film=f)
+    except Http404:
+        f = get_object_or_404(Serial, id=id)
+        recension_list = SerialRecension.objects.filter(serial=f)
+    context = {
+        "rList":recension_list,
+        "film": f,
+    }
+    return render(request, "partial/recension_list.html", context)
+def single_recension(request, id=id):
+    try:
+        recension = get_object_or_404(FilmRecension, id=id)
+    except Http404:
+        recension = get_object_or_404(SerialRecension, id=id)
+    context = {
+        "r": recension,
+    }
+    return render(request, "partial/single_recension.html", context)
 def info(request):
     context = {
         "text": "Здесь должна быть информация",

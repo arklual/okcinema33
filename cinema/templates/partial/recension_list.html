@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+	<div class="container">
+    	<h3>Рецензии:</h3>
+    	<div class="row blog">
+			{% for obj in rList %}
+        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+				<table border="1" bordercolor="white">
+					<tr><th><h4>{{ obj.title }}</h2></th></tr>
+					<tr>
+                        <td>
+						    <p>{{ obj.text|truncatechars:70 }} </p>
+                        <td>
+					</tr>
+                    <tr>
+                    <td><a href="{% url 'marks:single_recension' obj.id%}">Читать далее</a></td>
+                    </tr>
+				</table>
+			</div>
+		</div>
+		{% endfor %}
+        <a href="{% url 'mark:recension' film.id %}"><button class="btn btn-default">Оставить рецензию</button></a>
+	</div>
+{% endblock %}
