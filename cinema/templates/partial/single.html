@@ -10,7 +10,7 @@
         <p>{{film.description}}</p>
         <h2>Оценка: {{film.raiting}}</h2>
         {% if user.is_authenticated %}
-        <a class="btn-default" href="{% url 'player:player' film.id 1 1 %}"><button>Просмотр</button></a>
+        <a href="{% url 'player:player' film.id 1 1 %}"><button class="btn btn-default">Просмотр</button></a>
         <br>
         <br>
         <!-- There we need do the test, have user marked it yet? -->
