@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from .import views
 from .views import MyRegisterFormView
 
+app_name = "accounts"
 urlpatterns = [
     path('signup/', MyRegisterFormView.as_view(), name='signup'),
     path('profile/<str:username>', views.get_profile, name="profile"),
