@@ -26,4 +26,5 @@ urlpatterns = [
     path('marks/', include(('marks.urls', 'marks'), namespace='mark')),
     path('serial/', include(('serials.urls', 'serials'), namespace='serial')),
     path('list/', include(('movieList.urls', 'movieList'), namespace='list')),
+    path('search/', include(('search.urls', 'search'), namespace='search')),
 ]

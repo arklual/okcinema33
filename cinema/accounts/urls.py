@@ -8,7 +8,7 @@ from .views import MyRegisterFormView
 
 urlpatterns = [
     path('signup/', MyRegisterFormView.as_view(), name='signup'),
-    path('profile/<str:username>', views.get_profile, name="profile"),
+    path('profile/<int:id>', views.get_profile, name="profile"),
     
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
