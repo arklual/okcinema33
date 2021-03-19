@@ -19,9 +19,11 @@ class MyRegisterFormView(FormView):
     def form_invalid(self, form):
         return super(MyRegisterFormView, self).form_invalid(form)
 
-def get_profile(request, username):
-    us = get_object_or_404(User, username=username)
-    prof = get_object_or_404(Profile, user=us)
+def get_profile(request, id):
+    us = get_object_or_404(User, id=id)
+    pr = Profile.objects
+    print(pr.count())
+    prof = get_object_or_404(Profile, user_id=id)
     context = {
         "profile":prof,
     }

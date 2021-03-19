@@ -15,6 +15,6 @@ class Seriya(models.Model):
     season = models.IntegerField()
     number = models.IntegerField()
     title = models.CharField(max_length=50, default="")
-    video = models.FileField(null=True, blank=True)
+    video = models.URLField(null=True, blank=True)
     def __str__(self):
         return f"{self.number}.{self.title}"
