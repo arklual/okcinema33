@@ -1,31 +1,35 @@
 {% extends 'base.html' %}
 {% block head %}
-<title>{{ film.title }}</title>
+    <title>{{ film.title }}</title>
 {% endblock %}
- 
+
 {% block body %}
+    {% load qr_code %}
     <h1>{{ film.title }}</h1>
     <div class="container">
-        <img class="poster" src="{{film.poster.url}}">
-        <p>{{film.description}}</p>
-        <h2>Оценка: {{film.raiting}}</h2>
+        <img class="poster" src="{{ film.poster.url }}">
+        <p>{{ film.description }}</p>
+        <h2>Оценка: {{ film.raiting }}</h2>
         {% if user.is_authenticated %}
-        <a href="{% url 'player:player' film.id 1 1 %}"><button class="btn btn-default">Просмотр</button></a>
-        <br>
-        <br>
-        <!-- There we need do the test, have user marked it yet? -->
-        {% if notIsMarked %}
-        <p>Посмотрели? Оцените:</p>
-        <form class="form" action="{% url 'mark:ball' film.id %}" method="post">
-            {% csrf_token %}
-            {{form}}
+            <a href="{% url 'player:player' film.id 1 1 %}">
+                <button class="btn btn-default">Просмотр</button>
+            </a>
             <br>
-            <input class="btn btn-default" type="submit" value="OK">
-        </form>
-        {% endif %}
-        <a href="{% url 'mark:recension_list' film.id %}">Рецензии</a>
+            <br>
+           {% qr_from_text film.video size="t" image_format="png" error_correction="L" %}
+            <!-- There we need do the test, have user marked it yet? -->
+            {% if notIsMarked %}
+                <p>Посмотрели? Оцените:</p>
+                <form class="form" action="{% url 'mark:ball' film.id %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br>
+                    <input class="btn btn-default" type="submit" value="OK">
+                </form>
+            {% endif %}
+            <a href="{% url 'mark:recension_list' film.id %}">Рецензии</a>
         {% else %}
-        <p><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
+            <p><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
         {% endif %}
     </div>
     <br>
