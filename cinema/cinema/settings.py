@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'player.apps.PlayerConfig',
     'serials.apps.SerialsConfig',
     'marks.apps.MarksConfig',
+    'qr_code',
 ]
 
 MIDDLEWARE = [
