@@ -164,3 +164,9 @@ h1, h2, h3, h4, h5, h6, p{
 label{
     color: #f8104d;
 }
+.profile-img{
+    height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+}
