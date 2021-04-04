@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-<img class="profile-img" src="../../media/{{profile.image}}">
+<img class="profile-img" src="{{profile.image.url}}">
 <h2>{{profile.user.username}}<h2>
 <h4>Состояние</h4>
 <h4>Цель</h4>

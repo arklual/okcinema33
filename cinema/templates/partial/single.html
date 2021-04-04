@@ -17,7 +17,6 @@
             <br>
             <br>
            {% qr_from_text film.video size="t" image_format="png" error_correction="L" %}
-            <!-- There we need do the test, have user marked it yet? -->
             {% if notIsMarked %}
                 <p>Посмотрели? Оцените:</p>
                 <form class="form" action="{% url 'mark:ball' film.id %}" method="post">

@@ -6,7 +6,9 @@ class Film(models.Model):
     video = models.URLField(null=True, blank=True)
     poster = models.FileField(null=True, blank=True)
     raiting = models.FloatField(default=0, null=True, blank=True)
-    numMarks = models.IntegerField(default=0, null=True, blank=True)
+    numMarks = models.IntegerField(default=0, null=True, blank=True)  
     def __str__(self):
         return f"{self.title}"
-
+class Genre(models.Model):
+    name = models.CharField(max_length=50)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE)

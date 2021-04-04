@@ -4,6 +4,7 @@ from films.models import Film
 from serials.models import Serial, Seriya
 from marks.models import Voter, SerialVoter, FilmRecension, SerialRecension
 from .forms import BallForm, ResensionForm
+from accounts.models import Profile
 
 def ball(request, id=id):
     form = BallForm(request.POST)
@@ -17,6 +18,9 @@ def ball(request, id=id):
                 }
                 return render(request, "partial/information.html", context)
             v=Voter(user=request.user, film=film)
+            profile = get_object_or_404(Profile, user_id=request.user.id)
+            profile.numberOfMarks += 1
+            profile.save()
             v.save()
         except Http404:
             film = get_object_or_404(Serial, id=id)
@@ -62,6 +66,9 @@ def recension(request, id=id):
                 }
                 return render(request, "partial/information.html", context)
             r=FilmRecension(user=request.user, film=film, title=title, text=text)
+            profile = get_object_or_404(Profile, user_id=request.user.id)
+            profile.numberOfRecensions += 1
+            profile.save()
             r.save()
         except Http404:
             film = get_object_or_404(Serial, id=id)
