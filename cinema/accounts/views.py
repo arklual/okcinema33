@@ -25,3 +25,18 @@ def get_profile(request, id):
         "profile":prof,
     }
     return render(request, template_name="profile/profile.html", context=context)
+def profile_settings(request, id):
+    profile = get_object_or_404(Profile, user_id=id)
+    context = {
+        "profile":profile,
+    }
+    return render(request, template_name="profile/settings.html", context=context)
+def upload_ava(request, id):
+    profile = get_object_or_404(Profile, user_id=id)
+    if request.method == 'POST':
+        profile.image = request.FILES.get('ava')
+        profile.save()
+    context = {
+        "profile":profile,
+    }
+    return render(request, template_name="profile/profile.html", context=context)

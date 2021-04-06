@@ -1,4 +1,93 @@
-{% extends 'base.html' %}
-{% block body %}
+    {% extends 'base.html' %}
+    {% block body %}
+    {% if user.is_authenticated %}
+    {% if user.id == profile.user.id %}
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <img class="profile-img" src="{{profile.image.url}}">  
+    <h2>{{profile.user.username}}</h2>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ava">Загрузить аватарку</button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#email">Сменить email</button>
+    <div id="ava" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Выберите изображение</h4>
+            </div>
+            <div class="modal-body">
+                    <input name="ava" type="file">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="upload-btn" class="btn btn-default" data-dismiss="modal">Загрузить</button>
+            </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="email" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Введите новый email</h4>
+            </div>
+            <div class="modal-body">
+                <input type="email">
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="rename-btn" class="btn btn-default" data-dismiss="modal">Изменить</button>
+            </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        var file;
+        const inputElement = document.querySelector('input[type="file"]');
+        const pond = FilePond.create( inputElement, {
+            acceptedFileTypes:['image/png', 'image/jpeg'],
+            onaddfile: (err, fileItem) => {
+                if (!err) {
+                    file = fileItem.file
+                }
+                console.log(file)
+            },
+            onremovefile: (err, fileItem) => {
+                file = null
+                console.log(file)
+            }
+        } );
+
+        $(document).on('click', '#upload-btn', function(e) {
+            var formData = new FormData();
+            formData.append('ava', file)
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'accounts:upload_ava' profile.user.id %}",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                success: function (){
+                    alert('The post has been created!')
+                },
+                error: function(xhr, errmsg, err) {
+                    сonsole.log(xhr.status + ":" + xhr.responseText)
+                }
+            })
+        })
+    })
+</script>
+{% endif %}
+{% endif %}
 {% endblock body %}

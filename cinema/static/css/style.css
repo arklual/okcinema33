@@ -1,6 +1,10 @@
 body{
     background-color: #1a143b;  
 }
+html{
+    position: relative;
+    min-height: 100%;
+}
 h3{
     color: #f8104d;
 }
@@ -55,6 +59,11 @@ ul, ol {
 .footer-classic, .footer-classic a, .footer-classic a:focus, .footer-classic a:active{
     color: #f8104d;
     background-color: #281f55;
+}
+.footer-classic{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 .nav-list li {
     padding-top: 5px;
