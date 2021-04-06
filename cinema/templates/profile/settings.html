@@ -37,10 +37,10 @@
                 <h4 class="modal-title">Введите новый email</h4>
             </div>
             <div class="modal-body">
-                <input type="email">
+                <input type="email" id="emailBox">
             </div>
             <div class="modal-footer">
-                <button type="button" id="rename-btn" class="btn btn-default" data-dismiss="modal">Изменить</button>
+                <button type="button" id="change-email-btn" class="btn btn-default" data-dismiss="modal">Изменить</button>
             </div>
             </div>
 
@@ -79,7 +79,29 @@
                 contentType: false,
                 enctype: 'multipart/form-data',
                 success: function (){
-                    alert('The post has been created!')
+                    console.log("OK")
+                },
+                error: function(xhr, errmsg, err) {
+                    сonsole.log(xhr.status + ":" + xhr.responseText)
+                }
+            })
+        })
+        $(document).on('click', '#change-email-btn', function(e) {
+            var formData1 = new FormData();
+            var email = document.getElementById('emailBox').value;
+            formData1.append('email', email)
+            formData1.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'accounts:change_email' profile.user.id %}",
+                data: formData1,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                success: function (){
+                    console.log("OK1")
                 },
                 error: function(xhr, errmsg, err) {
                     сonsole.log(xhr.status + ":" + xhr.responseText)

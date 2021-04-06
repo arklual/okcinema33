@@ -39,4 +39,15 @@ def upload_ava(request, id):
     context = {
         "profile":profile,
     }
-    return render(request, template_name="profile/profile.html", context=context)
+    return render(request, template_name="profile/settings.html", context=context)
+def change_email(request, id):
+    profile = get_object_or_404(Profile, user_id=id)
+    if request.method == 'POST':
+        profile.email = request.POST.get('email')
+        profile.save()
+        profile.user.email = request.POST.get('email')
+        profile.user.save()
+    context = {
+        "profile":profile,
+    }
+    return render(request, template_name="profile/settings.html", context=context)
