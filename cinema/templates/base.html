@@ -3,8 +3,9 @@
   <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap-theme.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
-    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
-    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static '/css/all.css' %}">
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
   <script src="{% static '/js/jq.min.js' %}"></script>
   <script src="{% static '/js/bootstrap.min.js' %}"></script>
   <script src="{% static '/js/main.js' %}"></script>
@@ -33,30 +34,30 @@
         </div>
         <div class="collapse navbar-collapse" id="bs_navbar">
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'home:home' %}">Главная</a></li>
+                <li><a href="{% url 'home:home' %}"><i class="fas fa-home"></i> Главная</a></li>
                 <li class="dropdown">
                     <!--class="dropdown-toggle" data-toggle="dropdown"-->
-                    <a href="{% url 'list:dateMovieList' %}">Фильмы<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a>Мультфильмы</a></li>
+                    <a href="{% url 'list:dateMovieList' %}"><i class="fas fa-film"></i> Фильмы</a>
+                 <!--   <ul class="dropdown-menu">
+                        <li><a>Мультфильмы</a></li><b class="caret"></b>
                         <li><a>Семейное</a></li>
                         <li><a>Приключения</a></li>
-                    </ul>
+                    </ul>-->
                 </li>
                 <li><a>О нас</a></li>
             </ul>
             <form class="navbar-form navbar-right" action="{% url 'search:search' %}" method="GET">
                 <div class="form-group">
                     <input name="request" class="form-inline" type="text" placeholder="Поиск">
-                    <input type="submit" class="btn btn-default btn-sm" value="Найти">
+                    <button type="submit" class="btn btn-default btn-sm"><i class="fas fa-search"></i> Найти</button>
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'account:profile' user.id %}">Здравствуйте, {{ user.username }}!</a></li>
-                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                    <li><a href="{% url 'account:profile' user.id %}"><i class="fas fa-user-circle"></i> Здравствуйте, {{ user.username }}!</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Выйти</a></li>
                 {% else %}
-                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'login' %}">Войти <i class="fas fa-sign-in-alt"></i></a></li>
                     <li><a href="{% url 'account:signup' %}">Зарегистрироваться</a></li>
                 {% endif %}
             </ul>
@@ -89,10 +90,10 @@
                 </div>
             </div>
             <div class="no-gutters social-container">
-                <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-facebook"></span><span>Facebook</span></a></div>
-                <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-instagram"></span><span>instagram</span></a></div>
-                <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-twitter"></span><span>twitter</span></a></div>
-                <div class="col"><a class="social-inner" href="#"><span class="icon mdi mdi-youtube-play"></span><span>google</span></a></div>
+                <div class="col"><a class="social-inner" href="#"><span><i class="fab fa-facebook-square"></i> Facebook</span></a></div>
+                <div class="col"><a class="social-inner" href="#"><span><i class="fab fa-instagram-square"></i> Instagram</span></a></div>
+                <div class="col"><a class="social-inner" href="#"><span><i class="fab fa-twitter-square"></i> Twitter</span></a></div>
+                <div class="col"><a class="social-inner" href="#"><span><i class="fab fa-google-plus-square"></i> Google</span></a></div>
             </div>
         </div>
     </footer>

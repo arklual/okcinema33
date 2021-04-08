@@ -12,5 +12,6 @@ urlpatterns = [
     path('profile/<int:id>/settings/', views.profile_settings, name="profile_settings"),
     path('profile/<int:id>/upload/image/', views.upload_ava, name="upload_ava"),
     path('profile/<int:id>/change/email/', views.change_email, name="change_email"),
+    path('profile/<int:id>/change/name/', views.change_name, name="change_name"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

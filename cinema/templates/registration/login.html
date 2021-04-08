@@ -5,6 +5,6 @@
         {% csrf_token %}
         {{ form.as_p }}
         <p>Ещё не присоединились к нам? <a href="{% url 'account:signup' %}">Зарегистрироваться</a></p>
-        <input type="submit" value="Войти">
+        <input class="btn btn-default" type="submit" value="Войти">
     </form>
 {% endblock body %}

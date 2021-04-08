@@ -51,3 +51,12 @@ def change_email(request, id):
         "profile":profile,
     }
     return render(request, template_name="profile/settings.html", context=context)
+def change_name(request, id):
+    profile = get_object_or_404(Profile, user_id=id)
+    if request.method == 'POST':
+        profile.user.username = request.POST.get('name')
+        profile.user.save()
+    context = {
+        "profile":profile,
+    }
+    return render(request, template_name="profile/settings.html", context=context)
