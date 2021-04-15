@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+<form action="account:validate user.id" method="post">
+    <div class="form-group">
+        <label for="key">Введите код подтверждения: </label>
+        <input name="key" type="text">
+        <input class="btn btn-default" value="Подтвердить">
+    </div>
+</form>
+{% endblock %}
