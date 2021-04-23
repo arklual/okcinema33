@@ -97,15 +97,18 @@ def change_name(request, id):
 
 def validate(request, id):
     user = get_object_or_404(User, id=id)
+    context = {
+            "us": user,
+    }
     profile = get_object_or_404(Profile, user=user)
     if user.is_active:
         login(request, user)
+        return redirect('account:profile', user.id)
     else:
         if request.method == 'POST':
             key = request.POST.get('key')
-            if key is None:
-                return render(request, 'registration/validate.html')
-            if profile.key == key:
+            if str(profile.key) == key:
                 user.is_active = True
                 login(request, user)
-    return redirect('account:profile', user.id)
+                return redirect('home:home')
+    return render(request, 'registration/validate.html', context=context)
