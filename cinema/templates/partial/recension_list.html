@@ -9,7 +9,7 @@
 					<tr><th><h4>{{ obj.title }}</h2></th></tr>
 					<tr>
                         <td>
-						    <p>{{ obj.text|truncatechars:70 }} </p>
+						    <p>{{ obj.text|truncatechars:70 }}</p>
                         <td>
 					</tr>
                     <tr>
@@ -21,4 +21,14 @@
 		{% endfor %}
         <a href="{% url 'mark:recension' film.id %}"><button class="btn btn-default">Оставить рецензию</button></a>
 	</div>
+	<script>
+		$("p").
+		contents().
+		filter(function(i,el){   return el.nodeType === 3; }).
+		each(function(i, el){ 
+			var $el = $(el);
+			var replaced = $el.text().replace(/"(.*?)"/g,'"$1"') 
+			$el.replaceWith(replaced); 
+		});
+	</script>
 {% endblock %}

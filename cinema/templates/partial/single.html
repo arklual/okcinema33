@@ -5,8 +5,8 @@
 
 {% block body %}
     {% load qr_code %}
-    <h1>{{ film.title }}</h1>
     <div class="container">
+        <h1>{{ film.title }}</h1>
         <img class="poster" src="{{ film.poster.url }}">
         <p>{{ film.description }}</p>
         <h2>Оценка: {{ film.raiting }}</h2>

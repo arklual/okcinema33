@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from films.models import Film
 from serials.models import Serial
+from ckeditor.fields import RichTextField
 
 class Voter(models.Model):
     user = models.ForeignKey(
@@ -23,7 +24,7 @@ class FilmRecension(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE)
 
     title = models.CharField(default='', max_length=120)
-    text = models.TextField(default='')
+    text = RichTextField(blank=True,null=True)
 class SerialRecension(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -32,4 +33,4 @@ class SerialRecension(models.Model):
     serial = models.ForeignKey(Serial, on_delete=models.CASCADE)
 
     title = models.CharField(default='', max_length=120)
-    text = models.TextField(default='')
+    text = RichTextField(blank=True,null=True)

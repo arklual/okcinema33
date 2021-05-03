@@ -13,6 +13,7 @@
     {% if user.id == profile.user.id %}
     <a href="{% url 'accounts:profile_settings' profile.user.id %}"><button class="btn btn-info btn-lg">Настройки профиля</button></a>
     {% endif %}
+    <h1> </h1>
 </div>
 {% endif %}
 {% endblock body %}
