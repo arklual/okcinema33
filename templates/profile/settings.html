@@ -1,0 +1,162 @@
+    {% extends 'base.html' %}
+    {% block body %}
+    {% if user.is_authenticated %}
+    {% if user.id == profile.user.id %}
+    <div style="font-family: 'Oswald', sans-serif;" class="container">
+        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <img class="profile-img" src="{{profile.image.url}}">  
+        <h2 style="font-family: 'Oswald', sans-serif;">{{profile.user.username}}</h2>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ava">Загрузить аватарку</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#email">Сменить email</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#name">Сменить ник</button>
+        <h1> </h1>
+        <div style="font-family: 'Oswald', sans-serif;" id="ava" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 style="font-family: 'Oswald', sans-serif;" class="modal-title">Выберите изображение</h4>
+                </div>
+                <div class="modal-body">
+                        <input name="ava" type="file">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="upload-btn" class="btn btn-default" data-dismiss="modal">Загрузить</button>
+                </div>
+                </div>
+
+            </div>
+        </div>
+        <div style="font-family: 'Oswald', sans-serif;" id="email" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 style="font-family: 'Oswald', sans-serif;" class="modal-title">Введите новый email</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="email" id="emailBox">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="change-email-btn" class="btn btn-default" data-dismiss="modal">Изменить</button>
+                </div>
+                </div>
+
+            </div>
+        </div>
+        <div style="font-family: 'Oswald', sans-serif;" id="name" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 style="font-family: 'Oswald', sans-serif;" class="modal-title">Введите новый ник</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="nameBox">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="change-name-btn" class="btn btn-default" data-dismiss="modal">Изменить</button>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        var file;
+        const inputElement = document.querySelector('input[type="file"]');
+        const pond = FilePond.create( inputElement, {
+            acceptedFileTypes:['image/png', 'image/jpeg'],
+            onaddfile: (err, fileItem) => {
+                if (!err) {
+                    file = fileItem.file
+                }
+                console.log(file)
+            },
+            onremovefile: (err, fileItem) => {
+                file = null
+                console.log(file)
+            }
+        } );
+
+        $(document).on('click', '#upload-btn', function(e) {
+            var formData = new FormData();
+            formData.append('ava', file)
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'accounts:upload_ava' profile.user.id %}",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                success: function (){
+                    console.log("OK")
+                },
+                error: function(xhr, errmsg, err) {
+                    сonsole.log(xhr.status + ":" + xhr.responseText)
+                }
+            })
+        })
+        $(document).on('click', '#change-email-btn', function(e) {
+            var formData1 = new FormData();
+            var email = document.getElementById('emailBox').value;
+            formData1.append('email', email)
+            formData1.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'accounts:change_email' profile.user.id %}",
+                data: formData1,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                success: function (){
+                    console.log("OK1")
+                },
+                error: function(xhr, errmsg, err) {
+                    сonsole.log(xhr.status + ":" + xhr.responseText)
+                }
+            })
+        })
+        $(document).on('click', '#change-name-btn', function(e) {
+            var formData2 = new FormData();
+            var name = document.getElementById('nameBox').value;
+            formData2.append('name', name)
+            formData2.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'accounts:change_name' profile.user.id %}",
+                data: formData2,
+                cache: false,
+                processData: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                success: function (){
+                    console.log("OK1")
+                },
+                error: function(xhr, errmsg, err) {
+                    сonsole.log(xhr.status + ":" + xhr.responseText)
+                }
+            })
+        })
+    })
+    </script>
+{% endif %}
+{% endif %}
+{% endblock body %}

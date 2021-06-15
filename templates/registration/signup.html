@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+ 
+{% block body %}
+<div class="container">
+  <h1 style="font-family: 'Pangolin', sans-serif;">Регистрация пользователя</h1>
+  <form style="font-family: 'Oswald', sans-serif;" method="post">
+      {% csrf_token %}
+      {% if form.error_dict %}
+        <p class="error">Пожалуйста исправьте нижеприведённые ошибки.</p>
+      {% endif %}
+
+      {% if form.username.errors %}
+        {{ form.username.html_error_list }}
+      {% endif %}
+      <div class="form-group">
+      <label for="id_username">Логин:</label> {{ form.username }}
+      </div>
+      {% if form.email.errors %}
+          {{ form.email.html_error_list }}
+      {% endif %}
+      <div class="form-group">
+      <label for="id_email">Email:</label> {{ form.email }}
+      </div>
+      {% if form.password1.errors %}
+        {{ form.password1.html_error_list }}
+      {% endif %}
+      <div class="form-group">
+      <label for="id_password1">Пароль:</label> {{ form.password1 }}
+      </div>
+      {% if form.password2.errors %}
+        {{ form.password2.html_error_list }}
+      {% endif %}
+      <div class="form-group">
+      <label for="id_password2">Пароль(снова):</label> {{ form.password2 }}
+      </div>
+      <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+      <input class="btn btn-primary" type="submit" value="Зарегистрировать" />
+  </form>
+</div>
+{% endblock body %}

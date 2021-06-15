@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    {% load static %}
+    <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" /><link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+    <script src="{% static '/js/mediaelement-and-player.js' %}"></script>
+    <link rel="stylesheet" href="{% static '/css/mediaelementplayer.min.css' %}" />
+    <style>
+        .mejs__overlay-button {
+	        background-image: url("{% static 'img/mejs-controls.svg'%}");
+        }
+        .mejs__overlay-loading-bg-img {
+	        background-image: url("{% static 'img/mejs-controls.svg'%}");
+        }
+        .mejs__button > button {
+	        background-image: url("{% static 'img/mejs-controls.svg'%}");
+        }
+</style>
+{% endblock %} 
+
+{% block body %}
+    {% if user.is_authenticated %}
+    <video style="border: 0; width: 100%; height: 100%;" src="{{ v.video }}"></video>
+    <script>
+        $(document).ready(function() {
+            $('video').mediaelementplayer({
+                alwaysShowControls: true,
+                videoVolume: 'horizontal',
+                features: ['playpause', 'progress', 'volume', 'fullscreen']
+            })
+        });
+    </script>
+    {% endif %}
+{% endblock %}

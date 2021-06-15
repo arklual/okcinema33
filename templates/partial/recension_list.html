@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block body %}
+	<div class="container">
+    	<h3 style="font-family: 'Pangolin', sans-serif;">Рецензии:</h3>
+    	<div style="font-family: 'Oswald', sans-serif;" class="row blog">
+			{% for obj in rList %}
+        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+				<div class="card">
+					<div class="card-body">
+						<h4>{{ obj.title }}</h4>
+						<p class="card-text">
+							{{ obj.text|truncatechars:70 }}
+						</p>
+					</div>
+					<div class="card-footer">
+						<a href="{% url 'marks:single_recension' obj.id%}">Читать далее</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+        <a style="font-family: 'Pangolin', sans-serif;" href="{% url 'mark:recension' film.id %}"><button class="btn btn-default">Оставить рецензию</button></a>
+	</div>
+	<script>
+		$("p").
+		contents().
+		filter(function(i,el){   return el.nodeType === 3; }).
+		each(function(i, el){ 
+			var $el = $(el);
+			var replaced = $el.text().replace(/"(.*?)"/g,'"$1"') 
+			$el.replaceWith(replaced); 
+		});
+	</script>
+{% endblock %}

@@ -1,0 +1,172 @@
+body{
+    background-color: #1a143b;  
+}
+h3{
+    color: #f8104d;
+}
+
+.navbar{
+    margin-bottom: 0;
+}
+
+.navbar-default{
+    border-color: black;
+    background-image: linear-gradient(#333845, #281f55);
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #f7317a;
+    background-color: transparent;
+}
+.navbar-default .navbar-brand {
+    color: #f8104d;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #f8104d;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #f7317a;
+    background-color: transparent;
+}
+.header{
+    background-image: url('../img/header.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 23px;
+    font: 900 13px/1 "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    color: rgba(38, 34, 59, 0.5);
+}
+.social-container .col {
+    border: 1px solid #eedfe370;
+}
+.footer-classic, .footer-classic a, .footer-classic a:focus, .footer-classic a:active{
+    color: #f8104d;
+    background-color: #281f55;
+}
+.nav-list li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.nav-list li a:hover:before {
+    margin-left: 0;
+    opacity: 1;
+    visibility: visible;
+}
+.nav-list li a:before {
+    content: "\f14f";
+    font: 400 21px/1 "Material Design Icons";
+    color: #4d6de6;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: -28px;
+    margin-right: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .22s ease;
+}
+.blog{
+    margin: 4em 0;
+    position: relative;
+}
+.blog h1{
+    margin: 2em;
+}
+.blog .card{
+    box-shadow: 0 0 20px #ccc;
+}
+.blog .card img{
+    width: 100%;
+    object-fit: cover;
+    height: 14em;
+}
+.blog .card-body{
+    padding: 1em;
+    color: #f8104d;
+}
+.card-footer{
+    padding-left: 1em
+}
+.card-text{
+    color: #f8104d;
+}
+h1, h2, h3, h4, h5, h6, p{
+    color: #f8104d;
+}
+.poster{
+    width: 100%;
+    object-fit: contain;
+    height: 55em;
+}
+.player{
+    width: 100%;
+    object-fit: contain;
+}
+.fullscreen{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.btn-default{
+    background-color: #f8104d;
+    color: #fff;
+}
+.card{
+    margin-bottom: 20px;
+}
+#videoPlayer {
+    width: 800px;
+}
+ 
+#video {
+    width: 100%;
+}
+ 
+.video-track {
+    height: 5px;
+    width: 100%;
+    background-color: #b6b6b6;
+}
+ 
+.timeline {
+    height: 5px;
+    width: 0;
+    background-color: #58b4ff
+}
+ 
+.buttons {
+    padding: 5px 0;
+}
+.btn-primary{
+    color: #fff;
+    background-color: #f8104d;
+    border-color: #f8104d;
+}
+.btn-primary:hover{
+    color: #fff;
+    background-color: #f8100d;
+    border-color: #f8100d;
+}
+label{
+    color: #f8104d;
+}
+.profile-img{
+    height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+}

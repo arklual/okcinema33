@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+	<div class="container">
+        <h2 style="font-family: 'Pangolin', sans-serif;">{{ r.title }}</h2>
+		<p style="font-family: 'Oswald', sans-serif;">{{ r.text}} </p>
+	</div>
+	<script>
+		$("p").
+		contents().
+		filter(function(i,el){   return el.nodeType === 3; }).
+		each(function(i, el){ 
+			var $el = $(el);
+			var replaced = $el.text().replace(/"(.*?)"/g,'"$1"') 
+			$el.replaceWith(replaced); 
+		});
+	</script>
+{% endblock %}

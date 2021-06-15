@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if user.is_authenticated %}
+<div style="font-family: 'Oswald', sans-serif;" class="container">
+    <img class="profile-img" src="{{profile.image.url}}">  
+    <h2 style="font-family: 'Oswald', sans-serif;">{{profile.user.username}} <h3><a href="http://{{profile.email}}">{{profile.email}}</a></h3><h2>
+    <h4 style="font-family: 'Oswald', sans-serif;">Состояние</h4>
+    <h4 style="font-family: 'Oswald', sans-serif;">Цель</h4>
+    <h4 style="font-family: 'Oswald', sans-serif;">Репутация: {{profile.reputation}}</h4>
+    <h4 style="font-family: 'Oswald', sans-serif;">Количество оценок: {{profile.numberOfMarks}}</h4>
+    <h4 style="font-family: 'Oswald', sans-serif;">Количество рецензий: {{profile.numberOfRecensions}}</h4>
+    <h4 style="font-family: 'Oswald', sans-serif;">Последний вход: {{profile.user.last_login}}</h4>
+    <h5 style="font-family: 'Oswald', sans-serif;">Дата регистрации: {{profile.user.date_joined}}</h5>
+    {% if user.id == profile.user.id %}
+    <a href="{% url 'accounts:profile_settings' profile.user.id %}"><button class="btn btn-info btn-lg">Настройки профиля</button></a>
+    {% endif %}
+    <h1> </h1>
+</div>
+{% endif %}
+{% endblock body %}

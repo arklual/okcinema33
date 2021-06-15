@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+  <form class="form" action="{% url 'mark:recension' film.id %}" method="post">
+      {% csrf_token %}
+      {% if rForm.error_dict %}
+        <p class="error">Пожалуйста исправьте нижеприведённые ошибки.</p>
+      {% endif %}
+
+      {% if rForm.title.errors %}
+        {{ rForm.title.html_error_list }}
+      {% endif %}
+      <div class="form-group">
+      <label for="id_title">Заголовок рецензии:</label> <br> {{ rForm.title }}  
+      </div>
+      {% if rForm.text.errors %}
+          {{ rForm.text.html_error_list }}
+      {% endif %}
+      <div class="form-group">
+      <label for="id_text">Текст рецензии:</label> <br> {{ rForm.text }}
+      </div>
+      <input class="btn btn-default" id="submit" type="submit" value="Отправить">
+      {{rForm.media}}
+  </form>
+</div>
+{% endblock body %}

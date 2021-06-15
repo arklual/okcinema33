@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container">
+        <h1 style="font-family: 'Pangolin', sans-serif;">Вход</h1>
+        <form style="font-family: 'Oswald', sans-serif;" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>Ещё не присоединились к нам? <a href="{% url 'account:signup' %}">Зарегистрироваться</a></p>
+            <input class="btn btn-default" type="submit" value="Войти">
+        </form>
+    </div>
+{% endblock body %}

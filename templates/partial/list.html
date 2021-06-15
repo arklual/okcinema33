@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+	<div class="container">
+    	<h3 style="font-family: 'Pangolin', sans-serif;">Список:</h3>
+    	<div style="font-family: 'Oswald', sans-serif;" class="row blog">
+			{% for obj in movieList %}
+        	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+				<div class="card">
+					<div class="card-img">
+						<img align="center" src="{{obj.poster.url}}" class="img-fluid">
+					</div>
+					<div class="card-body">
+						<h4 style="font-family: 'Oswald', sans-serif;">{{ obj.title }}</h4>
+						<p class="card-text">
+							{{ obj.description|truncatechars:70 }}
+						</p>
+					</div>
+					<div class="card-footer">
+						<a href="{% url 'film:film' obj.id%}" class="card-link">Смотреть</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+    </div>
+{% endblock %}

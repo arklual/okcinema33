@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>{{ s.title }}</title>
+{% endblock %}
+ 
+{% block body %}
+    <h1>{{ s.title }}</h1>
+    <div class="container">
+        <img class="poster" src="{{s.poster.url}}">
+        <p>{{s.description}}</p>
+        <h2>Оценка на OK Online Cinema 33: {{s.raiting}}</h2>
+        {% if kp_exist %}
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на Kinopoisk: {{ kp_rait }}</h2>
+        {% endif %}
+        {% if imdb_exist %}
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на IMDB: {{ imdb_rait }}</h2>
+        {% endif %}
+        {% if user.is_authenticated %}
+        {% for ses in range %}
+            <h3>Сезон {{ forloop.counter }}</h3>
+                {% for ser in sers %}
+                    {% if ser.season == forloop.parentloop.counter %}
+                        <a href="{% url 'player:player' ser.id ser.season ser.number%}">{{ser.number}}.{{ser.title}}</a>
+                    {% endif %}
+                {% endfor %}
+        {% endfor %}
+        {% if notSerIsMarked %}
+        <p>Посмотрели? Оцените:</p>
+        <form class="form" action="{% url 'mark:ball' s.id %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            <br>
+            <input class="btn btn-default" type="submit" value="OK">
+        </form>
+        {% endif %}
+        <a href="{% url 'mark:recension_list' s.id %}">Рецензии</a>
+        {% else %}
+        <p><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
+        {% endif %}
+    </div>
+    <br>
+{% endblock %}
