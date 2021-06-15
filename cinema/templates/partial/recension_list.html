@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% block body %}
 	<div class="container">
-    	<h3>Рецензии:</h3>
-    	<div class="row blog">
+    	<h3 style="font-family: 'Pangolin', sans-serif;">Рецензии:</h3>
+    	<div style="font-family: 'Oswald', sans-serif;" class="row blog">
 			{% for obj in rList %}
         	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-				<table border="1" bordercolor="white">
-					<tr><th><h4>{{ obj.title }}</h2></th></tr>
-					<tr>
-                        <td>
-						    <p>{{ obj.text|truncatechars:70 }}</p>
-                        <td>
-					</tr>
-                    <tr>
-                    <td><a href="{% url 'marks:single_recension' obj.id%}">Читать далее</a></td>
-                    </tr>
-				</table>
+				<div class="card">
+					<div class="card-body">
+						<h4>{{ obj.title }}</h4>
+						<p class="card-text">
+							{{ obj.text|truncatechars:70 }}
+						</p>
+					</div>
+					<div class="card-footer">
+						<a href="{% url 'marks:single_recension' obj.id%}">Читать далее</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		{% endfor %}
-        <a href="{% url 'mark:recension' film.id %}"><button class="btn btn-default">Оставить рецензию</button></a>
+        <a style="font-family: 'Pangolin', sans-serif;" href="{% url 'mark:recension' film.id %}"><button class="btn btn-default">Оставить рецензию</button></a>
 	</div>
 	<script>
 		$("p").

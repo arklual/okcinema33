@@ -2,11 +2,11 @@
     {% block body %}
     {% if user.is_authenticated %}
     {% if user.id == profile.user.id %}
-    <div class="container">
+    <div style="font-family: 'Oswald', sans-serif;" class="container">
         <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
         <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
         <img class="profile-img" src="{{profile.image.url}}">  
-        <h2>{{profile.user.username}}</h2>
+        <h2 style="font-family: 'Oswald', sans-serif;">{{profile.user.username}}</h2>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ava">Загрузить аватарку</button>
         <br>
         <br>
@@ -15,13 +15,13 @@
         <br>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#name">Сменить ник</button>
         <h1> </h1>
-        <div id="ava" class="modal fade" role="dialog">
+        <div style="font-family: 'Oswald', sans-serif;" id="ava" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Выберите изображение</h4>
+                    <h4 style="font-family: 'Oswald', sans-serif;" class="modal-title">Выберите изображение</h4>
                 </div>
                 <div class="modal-body">
                         <input name="ava" type="file">
@@ -33,13 +33,13 @@
 
             </div>
         </div>
-        <div id="email" class="modal fade" role="dialog">
+        <div style="font-family: 'Oswald', sans-serif;" id="email" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Введите новый email</h4>
+                    <h4 style="font-family: 'Oswald', sans-serif;" class="modal-title">Введите новый email</h4>
                 </div>
                 <div class="modal-body">
                     <input type="email" id="emailBox">
@@ -51,13 +51,13 @@
 
             </div>
         </div>
-        <div id="name" class="modal fade" role="dialog">
+        <div style="font-family: 'Oswald', sans-serif;" id="name" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
                 <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Введите новый ник</h4>
+                    <h4 style="font-family: 'Oswald', sans-serif;" class="modal-title">Введите новый ник</h4>
                 </div>
                 <div class="modal-body">
                     <input type="text" id="nameBox">

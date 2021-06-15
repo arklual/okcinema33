@@ -8,7 +8,13 @@
     <div class="container">
         <img class="poster" src="{{s.poster.url}}">
         <p>{{s.description}}</p>
-        <h2>Оценка: {{s.raiting}}</h2>
+        <h2>Оценка на OK Online Cinema 33: {{s.raiting}}</h2>
+        {% if kp_exist %}
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на Kinopoisk: {{ kp_rait }}</h2>
+        {% endif %}
+        {% if imdb_exist %}
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на IMDB: {{ imdb_rait }}</h2>
+        {% endif %}
         {% if user.is_authenticated %}
         {% for ses in range %}
             <h3>Сезон {{ forloop.counter }}</h3>

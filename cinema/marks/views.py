@@ -20,6 +20,7 @@ def ball(request, id=id):
             v=Voter(user=request.user, film=film)
             profile = get_object_or_404(Profile, user_id=request.user.id)
             profile.numberOfMarks += 1
+            profile.reputation += 1
             profile.save()
             v.save()
         except Http404:
@@ -35,6 +36,7 @@ def ball(request, id=id):
         b = form.cleaned_data['ball']
         film.raiting = round((film.raiting * film.numMarks + b)/(film.numMarks+1), 1)
         film.numMarks+=1
+        profile.reputation += 1
         film.save()
         if type(film)==Film:
             context = {
@@ -68,6 +70,7 @@ def recension(request, id=id):
             r=FilmRecension(user=request.user, film=film, title=title, text=text)
             profile = get_object_or_404(Profile, user_id=request.user.id)
             profile.numberOfRecensions += 1
+            profile.reputation += 100
             profile.save()
             r.save()
         except Http404:
@@ -79,6 +82,8 @@ def recension(request, id=id):
                 }
                 return render(request, "partial/information.html", context)
             r=SerialRecension(user=request.user, serial=film, title=title, text=text)
+            profile.numberOfRecensions += 1
+            profile.reputation += 100
             r.save()
         if type(film)==Film:
             recension_list = FilmRecension.objects.filter(film=film)

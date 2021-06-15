@@ -6,9 +6,9 @@
     <header class="header"></header>
 	<br>
 	<div class="container">
-    	<h3>Новинки:</h3>
+    	<h3 style="font-family: 'Pangolin', sans-serif;"><strong>Новинки:</strong></h3>
 		<br>
-		<h4>Фильмы:</h4>
+		<h4 style="font-family: 'Pangolin', sans-serif;">Фильмы:</h4>
     	<div class="row blog">
 			{% for obj in filmList %}
         	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -17,12 +17,12 @@
 						<img align="center" src="{{obj.poster.url}}" class="img-fluid">
 					</div>
 					<div class="card-body">
-						<h4>{{ obj.title }}</h4>
-						<p class="card-text">
+						<h4 style="font-family: 'Oswald', sans-serif;">{{ obj.title }}</h4>
+						<p class="card-text" style="font-family: 'Oswald', sans-serif;">
 							{{ obj.description|truncatechars:70 }}
 						</p>
 					</div>
-					<div class="card-footer">
+					<div class="card-footer" style="font-family: 'Oswald', sans-serif;">
 						<a href="{% url 'film:film' obj.id%}" class="card-link">Смотреть</a>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 			{% endfor %}
 			</div>
 			<br>
-			<h4>Сериалы:</h4>
+			<h4 style="font-family: 'Pangolin', sans-serif;">Сериалы:</h4>
 			<div class="row blog">
 			{% for obj in sList %}
         	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -39,12 +39,12 @@
 						<img align="center" src="{{obj.poster.url}}" class="img-fluid">
 					</div>
 					<div class="card-body">
-						<h4>{{ obj.title }}</h4>
-						<p class="card-text">
+						<h4 style="font-family: 'Oswald', sans-serif;">{{ obj.title }}</h4>
+						<p class="card-text" style="font-family: 'Oswald', sans-serif;">
 							{{ obj.description|truncatechars:70 }}
 						</p>
 					</div>
-					<div class="card-footer">
+					<div class="card-footer" style="font-family: 'Oswald', sans-serif;">
 						<a href="{% url 'serial:serial' obj.id%}" class="card-link">Смотреть</a>
 					</div>
 				</div>

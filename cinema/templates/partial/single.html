@@ -6,29 +6,41 @@
 {% block body %}
     {% load qr_code %}
     <div class="container">
-        <h1>{{ film.title }}</h1>
+        <h1 style="font-family: 'Pangolin', sans-serif;">{{ film.title }}</h1>
         <img class="poster" src="{{ film.poster.url }}">
-        <p>{{ film.description }}</p>
-        <h2>Оценка: {{ film.raiting }}</h2>
+        <p style="font-family: 'Oswald', sans-serif;">Жанры: {% for g in genres %} {{g.name}}{% endfor %}</p>
+        <p style="font-family: 'Pangolin', sans-serif; color: #FFF;">{{ film.description }}</p>
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на OK Online Cinema 33: <span style="color: #FFF;">{{ film.raiting }}</span></h2>
+        {% if kp_exist %}
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на КиноПоиск: <span style="color: #FFF;">{{ kp_rait }}</span></h2>
+        {% endif %}
+        {% if imdb_exist %}
+        <h2 style="font-family: 'Pangolin', sans-serif;">Оценка на IMDB: <span style="color: #FFF;">{{ imdb_rait }}</span></h2>
+        {% endif %}
         {% if user.is_authenticated %}
             <a href="{% url 'player:player' film.id 1 1 %}">
-                <button class="btn btn-default">Просмотр</button>
+                <button class="btn btn-default" style="font-family: 'Oswald', sans-serif;">Просмотр</button>
             </a>
             <br>
             <br>
-           {% qr_from_text film.video size="t" image_format="png" error_correction="L" %}
+            <details>
+                <summary style="font-family: 'Oswald', sans-serif;" class="btn btn-default">Смотреть на Android</summary>
+                <h1></h1>
+                <img src="{% qr_url_from_text film.video size=4 version=10 image_format='png' %}">
+            </details>
+            <br>
             {% if notIsMarked %}
-                <p>Посмотрели? Оцените:</p>
-                <form class="form" action="{% url 'mark:ball' film.id %}" method="post">
+                <p style="font-family: 'Oswald', sans-serif;">Посмотрели? Оцените:</p>
+                <form style="font-family: 'Oswald', sans-serif;" class="form" action="{% url 'mark:ball' film.id %}" method="post">
                     {% csrf_token %}
                     {{ form }}
                     <br>
                     <input class="btn btn-default" type="submit" value="OK">
                 </form>
             {% endif %}
-            <a href="{% url 'mark:recension_list' film.id %}">Рецензии</a>
+            <a style="font-family: 'Oswald', sans-serif;" href="{% url 'mark:recension_list' film.id %}">Рецензии</a>
         {% else %}
-            <p><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
+            <p style="font-family: 'Oswald', sans-serif;"><a href="{% url 'login' %}">Войдите</a>, чтобы посмотреть</p>
         {% endif %}
     </div>
     <br>

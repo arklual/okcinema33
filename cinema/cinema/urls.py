@@ -27,4 +27,7 @@ urlpatterns = [
     path('serial/', include(('serials.urls', 'serials'), namespace='serial')),
     path('list/', include(('movieList.urls', 'movieList'), namespace='list')),
     path('search/', include(('search.urls', 'search'), namespace='search')),
+    path('qr_code/', include('qr_code.urls', namespace="qr_code")),
+    path('aboutus/', include(('about_us.urls', 'about_us'), namespace="about_us")), 
+    path('manual/', include(('manual.urls', 'manual'), namespace="manual")), 
 ]

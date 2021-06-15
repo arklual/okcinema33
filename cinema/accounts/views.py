@@ -41,7 +41,7 @@ def register(request):
                     return redirect('account:validate', user.id)
     form = CreateUserForm()
     context = {'form': form}
-    return render(request, 'registration/signup.html', context)
+    return redirect('manual:manual')
 
 
 def get_profile(request, id):
@@ -103,7 +103,7 @@ def validate(request, id):
     profile = get_object_or_404(Profile, user=user)
     if user.is_active:
         login(request, user)
-        return redirect('account:profile', user.id)
+        return redirect('manual:manual')
     else:
         if request.method == 'POST':
             key = request.POST.get('key')

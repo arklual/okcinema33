@@ -9,6 +9,7 @@ class Profile(models.Model):
   image = models.ImageField()
   numberOfMarks = models.IntegerField(default=0)
   numberOfRecensions = models.IntegerField(default=0)
+  reputation = models.IntegerField(default=0)
   key = models.IntegerField(default=0)
 
   def __str__(self):
