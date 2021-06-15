@@ -1,1 +1,1 @@
-web: gunicorn cinema.wsgi --log-fileto
+web: gunicorn cinema.wsgi
