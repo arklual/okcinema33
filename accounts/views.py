@@ -41,7 +41,7 @@ def register(request):
                     return redirect('account:validate', user.id)
     form = CreateUserForm()
     context = {'form': form}
-    return redirect('manual:manual')
+    return render(request, 'registration/signup.html', context)
 
 
 def get_profile(request, id):
