@@ -1,7 +1,7 @@
 from django.db import models
 class Film(models.Model):
     title = models.CharField(max_length=50)
-    kp_id = models.CharField(max_length=70, default='')
+    kp_id = models.CharField(max_length=70, null=True, blank=True)
     date = models.DateField("Дата", auto_now=False)
     description = models.TextField()
     video = models.URLField(null=True, blank=True)

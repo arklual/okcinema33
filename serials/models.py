@@ -2,7 +2,7 @@ from django.db import models
 
 class Serial(models.Model):
     title = models.CharField(max_length=50, default="")
-    kp_id = models.CharField(max_length=70, default='')
+    kp_id = models.CharField(max_length=70, null=True, blank=True)
     date = models.DateField("Дата", auto_now=False)
     description = models.TextField(default="")
     count_sesonov = models.IntegerField(default=1)
