@@ -9,21 +9,25 @@ from urllib import request as rqs
 def serial(request, id=None):
     form = BallForm
     serial = get_object_or_404(Serial, id=id)
-    kp_url = "https://rating.kinopoisk.ru/"+serial.kp_id+".xml"
     kp_rait = 0
     imdb_rait = 0
-    f_xml = rqs.urlopen(kp_url)
-    xml = f_xml.read()
-    xml_root = etree.fromstring(xml)
-    for elem in xml_root.getchildren():
-        if not elem.text:
-            text = "None"
-        else:
-            text = elem.text
-        if(elem.tag == "kp_rating"):
-            kp_rait = float(elem.text)
-        if(elem.tag == "imdb_rating"):
-            imdb_rait = float(elem.text)
+    if not serial.kp_id is None:
+        kp_url = "https://rating.kinopoisk.ru/"+serial.kp_id+".xml"
+        try:
+            f_xml = rqs.urlopen(kp_url)
+            xml = f_xml.read()
+            xml_root = etree.fromstring(xml)
+            for elem in xml_root.getchildren():
+                if not elem.text:
+                    text = "None"
+                else:
+                    text = elem.text
+                if(elem.tag == "kp_rating"):
+                    kp_rait = float(elem.text)
+                if(elem.tag == "imdb_rating"):
+                    imdb_rait = float(elem.text)
+        except:
+            pass
     context = {
         "notSerIsMarked": not SerialVoter.objects.filter(serial_id=id, user_id=request.user.id).exists(),
         "s": serial,
