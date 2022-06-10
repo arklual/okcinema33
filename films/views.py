@@ -8,21 +8,25 @@ from urllib import request as rqs
 def single(request, id=None):
     form = BallForm
     film = get_object_or_404(Film, id=id)
-    kp_url = "https://rating.kinopoisk.ru/"+film.kp_id+".xml"
     kp_rait = 0
     imdb_rait = 0
-    f_xml = rqs.urlopen(kp_url)
-    xml = f_xml.read()
-    xml_root = etree.fromstring(xml)
-    for elem in xml_root.getchildren():
-        if not elem.text:
-            text = "None"
-        else:
-            text = elem.text
-        if(elem.tag == "kp_rating"):
-            kp_rait = float(elem.text)
-        if(elem.tag == "imdb_rating"):
-            imdb_rait = float(elem.text)
+    if not film.kp_id is None:
+        kp_url = "https://rating.kinopoisk.ru/"+film.kp_id+".xml"
+        try:
+            f_xml = rqs.urlopen(kp_url)
+            xml = f_xml.read()
+            xml_root = etree.fromstring(xml)
+            for elem in xml_root.getchildren():
+                if not elem.text:
+                    text = "None"
+                else:
+                    text = elem.text
+                if(elem.tag == "kp_rating"):
+                    kp_rait = float(elem.text)
+                if(elem.tag == "imdb_rating"):
+                    imdb_rait = float(elem.text)
+        except:
+            pass
 
     genres = Genre.objects.filter(film_id = film.id)
     context = {
