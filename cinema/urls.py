@@ -30,4 +30,5 @@ urlpatterns = [
     path('qr_code/', include('qr_code.urls', namespace="qr_code")),
     path('aboutus/', include(('about_us.urls', 'about_us'), namespace="about_us")), 
     path('manual/', include(('manual.urls', 'manual'), namespace="manual")), 
+    path('api/', include(('api.urls', 'api'), namespace="api")), 
 ]
