@@ -12,7 +12,7 @@ def film_list(request):
         genres = Genre.objects.filter(film=film)
         genre = ''
         for i in genres:
-            genre += i
+            genre += i.name
         movies.append({
             'name' : name,
             'thumb' : thumb,
