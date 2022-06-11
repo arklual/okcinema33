@@ -1,16 +1,18 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from films.models import Film
+from films.models import Film, Genre
 
-
-def movie_list(request):
+def film_list(request):
     films = Film.objects.all()
     movies = []
     for film in films:
         name = film.title
         thumb = film.poster.url
         video = film.video
-        genre = 'Жанр'
+        genres = Genre.objects.filter(film=film)
+        genre = ''
+        for i in genres:
+            genre += i
         movies.append({
             'name' : name,
             'thumb' : thumb,

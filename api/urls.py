@@ -5,6 +5,6 @@ from django.conf.urls.static import static
 from .import views
  
 urlpatterns = [
-    path('movie-list', views.movie_list, name='movie_list'),
+    path('film-list', views.film_list, name='film_list'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
