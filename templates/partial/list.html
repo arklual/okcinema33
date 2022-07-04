@@ -16,7 +16,11 @@
 						</p>
 					</div>
 					<div class="card-footer">
+						{% if obj.get_class_name == 'Film'%}
 						<a href="{% url 'film:film' obj.id%}" class="card-link">Смотреть</a>
+						{% else %}
+						<a href="{% url 'serial:serial' obj.id%}" class="card-link">Смотреть</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>

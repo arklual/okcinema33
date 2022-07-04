@@ -14,6 +14,9 @@ class Film(models.Model):
         verbose_name_plural = 'Фильмы'
     def __str__(self):
         return f"{self.title}"
+    def get_class_name(self):
+        return 'Film'
+
 class Genre(models.Model):
     name = models.CharField(max_length=50, verbose_name='Название')
     film = models.ForeignKey(Film, on_delete=models.CASCADE, verbose_name='Фильм')

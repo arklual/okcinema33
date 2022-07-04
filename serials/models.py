@@ -14,6 +14,10 @@ class Serial(models.Model):
         verbose_name_plural = 'Сериалы'
     def __str__(self):
         return f"{self.title}"
+    
+    def get_class_name(self):
+        return "Serial"
+
 class Seriya(models.Model):
     serial = models.ForeignKey(Serial,default="", on_delete=models.CASCADE, verbose_name='Сериал')
     season = models.IntegerField(verbose_name='Сезон')
