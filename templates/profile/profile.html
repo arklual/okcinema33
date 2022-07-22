@@ -2,7 +2,7 @@
 {% block body %}
 {% if user.is_authenticated %}
 <div style="font-family: 'Oswald', sans-serif;" class="container">
-    {% if prifile.image %}
+    {% if profile.image %}
     <img class="profile-img" src="{{profile.image.url}}">  
     {% endif %}
     <h2 style="font-family: 'Oswald', sans-serif;">{{profile.user.username}} <h3><a href="http://{{profile.email}}">{{profile.email}}</a></h3><h2>
