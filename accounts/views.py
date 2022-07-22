@@ -32,11 +32,6 @@ def register(request):
                     profile = Profile.objects.create(user=user, email=form.cleaned_data.get('email'), key=key)
                     user.email = profile.email
                     user.save()
-                    user.is_active = False
-                    user.save()
-                    send_mail('Мы благодарим Вас за регистрацию на OK Online Cinema!', 'Код подтверждения: ' + str(key),
-                              'arklual@gmail.com', [form.cleaned_data.get('email')],
-                              fail_silently=False)
                     context = {'user': user}
                     return redirect('account:validate', user.id)
     form = CreateUserForm()
@@ -94,7 +89,7 @@ def change_name(request, id):
     }
     return render(request, template_name="profile/settings.html", context=context)
 
-
+#now it dont't work because of google update
 def validate(request, id):
     user = get_object_or_404(User, id=id)
     context = {
